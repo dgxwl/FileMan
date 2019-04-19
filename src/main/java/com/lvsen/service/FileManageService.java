@@ -3,6 +3,7 @@ package com.lvsen.service;
 import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class FileManageService implements IFileManageService {
 				vo.setName(file.getName());
 				vo.setLength(getFileSizeStr(getTotalSizeOfFilesInDir(file)));
 				vo.setDirectory(file.isDirectory());
+				vo.setLastModified(new Date(file.lastModified()));
 				list.add(vo);
 			}
 		} else {  //文件或其他
@@ -37,7 +39,11 @@ public class FileManageService implements IFileManageService {
 		return list;
 	}
 
-	public void delete(File f) {
+	/**
+	 * 将给定的File所表示的文件或目录删除
+	 * @param f
+	 */
+	public static void delete(File f) {
 		if (f.isDirectory()) {
 			File[] subs = f.listFiles();
 			for (int i = 0; i < subs.length; i++) {

@@ -13,10 +13,4 @@ public interface IFileManageService {
 	 * @return 返回null表示该目录不存在
 	 */
 	public List<FileVO> getFileList(File f);
-	
-	/**
-	 * 将给定的File所表示的文件或目录删除
-	 * @param f
-	 */
-	public void delete(File f);
 }
